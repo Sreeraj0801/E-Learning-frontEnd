@@ -1,0 +1,11 @@
+*{
+    margin: 0%;
+}
+.navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll{
+    --bs-scroll-height: 100px;
+}
+.navbar-brand{
+    font-family: fantasy;
+    font-size: xx-large;
+    color:#ffff;
+}
