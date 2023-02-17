@@ -1,7 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
+import {useCookies} from 'react-cookie';
 import "./Navbar.css";
 function Navbar() {
+  const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies([]);
+
+  const handleRemoveCookie=() =>{
+    removeCookie('adminToken');
+  }
+  const logOut = () => {
+    removeCookie('adminToken');
+    //navigate('/adminLogin');
+  }
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -30,6 +41,14 @@ function Navbar() {
               <li className="nav-item">
                 <Link className="nav-link" to='/admin/course'>
                   Courses
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link "
+                  to="/admin/chapter"
+                >
+                  Chapter
                 </Link>
               </li>
               <li className="nav-item dropdown">
@@ -67,18 +86,43 @@ function Navbar() {
                   </li>
                 </ul>
               </li>
-              <li className="nav-item">
+              <li className="nav-item dropdown">
                 <Link
-                  className="nav-link disabled"
+                  className="nav-link dropdown-toggle"
                   href="#"
-                  tabIndex="-1"
-                  aria-disabled="true"
+                  id="navbarScrollingDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
                 >
-                  Link
+                  Users
                 </Link>
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="navbarScrollingDropdown"
+                >
+                  <li>
+                    <Link className="dropdown-item" to='/admin/users/request'>
+                      Requested Users
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/admin/users/approved">
+                      Approved Users
+                    </Link>
+                  </li>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" href="#">
+                      Something else here
+                    </Link>
+                  </li>
+                </ul>
               </li>
             </ul>
-            <form className="d-flex">
+            <div className="d-flex">
             <h6 className="mt-2 me-2">Admin</h6> &nbsp;&nbsp;
               <input
                 className="form-control me-2"
@@ -89,10 +133,10 @@ function Navbar() {
               <button className="btn btn-outline-success" type="submit">
                 Search
               </button> &nbsp;
-              <button className="btn btn-outline-danger mx-3" type="submit">
+              <button className="btn btn-outline-danger mx-3"  onClick={handleRemoveCookie}>
                 Logout
               </button>
-            </form>
+            </div>
           </div>
         </div>
       </nav>

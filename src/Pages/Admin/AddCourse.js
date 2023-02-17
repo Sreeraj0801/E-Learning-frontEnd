@@ -28,7 +28,7 @@ function AddCourse() {
             if(!values.name)generateError("course name is mandatory")
             if(!values.discription)generateError("Please provide a discription")
             else{
-            const {data} = await axios.post('http://localhost:3000/admin/course/create',{...values});
+            const {data} = await axios.post('http://localhost:4000/admin/course/create',{...values},{withCredentials:true});
             if(data.created) navigate('/admin/course');
             else generateError(data.message)
             }

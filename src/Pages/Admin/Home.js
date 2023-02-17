@@ -1,5 +1,7 @@
-import React from "react";
+import React,{useEffect} from "react";
+import { useCookies } from 'react-cookie';
 import Navbar from "../../Components/Navbar/Navbar";
+
 const Home = () => {
   return (
     <div>

@@ -19,7 +19,7 @@ function EditCourse() {
   //------------------------------------------------------
   useEffect(() => {
     if(id){
-      axios.get('http://localhost:3000/admin/course/edit/'+id).then((response)=>{
+      axios.get('http://localhost:4000/admin/course/edit/'+id,{withCredentials:true}).then((response)=>{
         setValues({
           name:response.data.name,
           discription:response.data.discription,
@@ -40,7 +40,7 @@ function EditCourse() {
              if(!values.name )generateError("course name is mandatory")
              if(!values.discription)generateError("Please provide a discription")
              else{
-             const {data} = await axios.put('http://localhost:3000/admin/course/edit',{...values});
+             const {data} = await axios.patch('http://localhost:4000/admin/course/edit',{...values},{withCredentials:true});
              console.log(data);
              if (data) {
               navigate('/admin/course')

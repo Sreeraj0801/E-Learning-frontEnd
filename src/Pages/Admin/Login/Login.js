@@ -7,9 +7,9 @@ import { Navigate,useNavigate,Link } from "react-router-dom";
 
 import './Login.css'
 function Login() {
-  //navigation 
-  const navigate = useNavigate();
-
+    //navigation 
+    const navigate = useNavigate();
+  //const [cookies] = useCookies(['adminToken']);
   //for managing username and password
   const [values,setValues] = useState({
     username:"",
@@ -28,8 +28,7 @@ function Login() {
   const handleSubmit = async(e)=>{
     e.preventDefault();
     try {
-      const {data} = await axios.post('http://localhost:3000/admin',{...values});
-      console.log(data);
+      const {data} = await axios.post('http://localhost:4000/admin',{...values},{withCredentials:true});
       if(data.created){ 
         navigate('/admin/home')
       }else{

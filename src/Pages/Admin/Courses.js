@@ -12,18 +12,21 @@ function Courses() {
   //--------------------- delete course ---------------
   const deleteCourse = (id) => {
     try {
-      axios.delete('http://localhost:3000/admin/course/delete',{ data: { id: id } }).then(response => {
+      axios.delete('http://localhost:4000/admin/course/delete', {data:{id}})
+      .then(() => {
         setCourses(
           courses.filter((course)=>{
-      if(course._id !== id){return course}}))})
+      if(course._id !== id){return course}}))
+    })
       .catch(error =>console.log(error))
-    } catch (error) {console.error(error)}}
+    } catch (error) {console.error(error)}
+  }
 
   //----------------------- Edit course -----------------
   const editCourse = (id) => {navigate('/admin/course/edit',{state:id});}
   
   useEffect(()=>{
-    axios.get('http://localhost:3000/admin/course/').then(data => {setCourses(data.data.details);})
+    axios.get('http://localhost:4000/admin/course/',{withCredentials:true}).then(data => {setCourses(data.data.details);})
     .catch(error => console.log(error))
   },[])
 
@@ -53,7 +56,7 @@ function Courses() {
                     <h5 className="card-title ">{index+1} . {course.name}</h5>
                     <p className="card-text">{course.discription}.</p>
                     <div className="d-flex justify-content-center bg-light p-2">
-                    <h5 className="bi bi-pencil-square text-warning me-5"  onClick={()=>{editCourse(course._id)}}></h5>
+                    <h5 className="bi bi-pencil-square text-warning me-5" onClick={()=>{editCourse(course._id)}}></h5>
                     <h5 className="bi bi-trash-fill text-danger" onClick={()=>{deleteCourse(course._id)}}></h5>
                     </div>
                   </div>
